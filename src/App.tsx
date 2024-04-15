@@ -14,9 +14,7 @@ function App() {
         <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
       </section>
 
-      <section>
-        This is where the noose will be
-      </section>
+      <section>This is where the noose will be</section>
     </div>
   );
 }
