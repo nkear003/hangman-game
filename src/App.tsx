@@ -23,15 +23,15 @@ function App() {
   const emptySpaces = createEmptySpaces();
 
   return (
-    <>
-      <header>
-        <h1 className="text-xl">Hangman game</h1>
+    <main className='p-6'>
+      <header className="mb-6">
+        <h1 className="text-2xl font-bold">Hangman game</h1>
       </header>
 
       {/* Flex container */}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-6">
         {/* Left side */}
-        <div className="flex flex-col flex-grow flex-shrink basis-0">
+        <div className="flex flex-col flex-1 gap-6">
           <section id="guesses">
             <h2>Category</h2>
             <p className="capitalize">
@@ -52,11 +52,11 @@ function App() {
         </div>
 
         {/* Right side */}
-        <div className="flex flex-grow flex-shrink basis-0">
+        <div className="flex flex-1">
           <section id="noose">This is where the noose will be</section>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 
