@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import type { Word } from './types';
-import { words } from './data';
+import { words, alphabet } from './data';
 import { getRandomNumber } from './helpers';
 
 function App() {
@@ -23,25 +23,37 @@ function App() {
   const emptySpaces = createEmptySpaces();
 
   return (
-    <div>
-      <h1>Hangman game</h1>
-      <pre>{JSON.stringify(randomWord)}</pre>
-      <section id="guesses">
-        <h2>Category</h2>
-        <p>
-          {randomWord?.category
-            ? randomWord.category
-            : 'There was an issue selecting a random word'}
-        </p>
-        <p>{emptySpaces}</p>
-      </section>
+    <>
+      <header>
+        <h1>Hangman game</h1>
+      </header>
 
-      <section id="alphabet">
-        <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
-      </section>
+      {/* Left side */}
+      <div className="flex">
+        <div className="flex flex-col basis-1/4">
+          <section id="guesses">
+            <h2>Category</h2>
+            <p className="capitalize">
+              {randomWord?.category
+                ? randomWord.category
+                : 'There was an issue selecting a random word'}
+            </p>
+            <p>{emptySpaces}</p>
+          </section>
 
-      <section id="noose">This is where the noose will be</section>
-    </div>
+          <section id="alphabet">
+            {alphabet.map((letter) => {
+              return <span className="text-3xl hover:cursor-pointer">{letter}</span>;
+            })}
+          </section>
+        </div>
+      </div>
+
+      {/* Right side */}
+      <div className="">
+        <section id="noose">This is where the noose will be</section>
+      </div>
+    </>
   );
 }
 
