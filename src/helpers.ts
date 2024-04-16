@@ -10,5 +10,13 @@ export const getRandomWord = (words: Word[]): Word => {
   return words[randomNum];
 };
 
+export const drawGuesses = (word: string, guessedLetters: string[] = ['']) => {
+  return word
+    .split('')
+    .map((letter) =>
+      guessedLetters.includes(letter) ? `<span>${letter}</span>` : `<span>_</span>`,
+    );
+};
+
 // TODO: Remove
 // export const alphabetString = alphabet.join(' ');

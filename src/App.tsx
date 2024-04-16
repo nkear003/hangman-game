@@ -1,19 +1,11 @@
 import React from 'react';
 import './App.css';
 import { words, alphabet } from './data';
-import { getRandomWord } from './helpers';
+import { getRandomWord, drawGuesses } from './helpers';
 
 function App() {
-  function createEmptySpaces() {
-    let string = '';
-    for (let i = 0; i < randomWord.name.length; i++) {
-      string += '_ ';
-    }
-    return string;
-  }
-
   const randomWord = getRandomWord(words);
-  const emptySpaces = createEmptySpaces();
+  const emptySpaces = drawGuesses(randomWord.name);
 
   return (
     <main className="p-6">
