@@ -26,13 +26,13 @@ describe('drawGuesses', () => {
     const word = 'CAT';
     const guessedLetters = ['A'];
     const result = drawGuesses(word, guessedLetters);
-    expect(result).toEqual(['<span>_</span>', '<span>A</span>', '<span>_</span>']);
+    expect(result).toEqual(['_', 'A', '_']);
   });
 
   it('should draw empty spaces for each letter if there are no guesses', () => {
     const word = 'CAT';
     const guessedLetters: string[] = [];
     const result = drawGuesses(word, guessedLetters);
-    expect(result).toEqual(['<span>_</span>', '<span>_</span>', '<span>_</span>']);
+    expect(result).toEqual(['_', '_', '_']);
   });
 });

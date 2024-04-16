@@ -12,6 +12,6 @@ export const drawGuesses = (word: string, guessedLetters: string[] = ['']) => {
   return word
     .split('')
     .map((letter) =>
-      guessedLetters.includes(letter) ? `<span>${letter}</span>` : `<span>_</span>`,
+      guessedLetters.includes(letter) ? letter : "_",
     );
 };

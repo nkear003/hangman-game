@@ -5,7 +5,7 @@ import { getRandomWord, drawGuesses } from './helpers';
 
 function App() {
   const randomWord = getRandomWord(words);
-  const emptySpaces = drawGuesses(randomWord.name);
+  const guesses = drawGuesses(randomWord.name);
 
   return (
     <main className="p-6">
@@ -25,13 +25,19 @@ function App() {
                   : 'There was an issue selecting a random word'}
               </p>
             </div>
-            <p>{emptySpaces}</p>
+            <div className="flex gap-3 text-3xl">
+              {guesses.map((letter, index) => (
+                <span key={`alphabet-${index}-${letter}`}>{letter}</span>
+              ))}
+            </div>
           </section>
 
           <section>
-            <div className="break-all text-left">
-              {alphabet.map((letter) => (
-                <span className="text-3xl hover:cursor-pointer">{letter}</span>
+            <div className="flex flex-wrap gap-3 break-all text-left">
+              {alphabet.map((letter, index) => (
+                <span key={`alphabet-${index}-${letter}`} className="text-3xl hover:cursor-pointer">
+                  {letter}
+                </span>
               ))}
             </div>
           </section>
