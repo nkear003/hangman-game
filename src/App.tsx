@@ -23,7 +23,7 @@ function App() {
   const emptySpaces = createEmptySpaces();
 
   return (
-    <main className='p-6'>
+    <main className="p-6">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Hangman game</h1>
       </header>
@@ -32,18 +32,19 @@ function App() {
       <div className="flex flex-wrap gap-6">
         {/* Left side */}
         <div className="flex flex-col flex-1 gap-6">
-          <section id="guesses">
-            <h2>Category</h2>
-            <p className="capitalize">
-              {randomWord?.category
-                ? randomWord.category
-                : 'There was an issue selecting a random word'}
-            </p>
+          <section className="flex flex-col gap-6">
+            <div className="flex">
+              <p className="uppercase border-2 border-black p-2">
+                {randomWord?.category
+                  ? randomWord.category
+                  : 'There was an issue selecting a random word'}
+              </p>
+            </div>
             <p>{emptySpaces}</p>
           </section>
 
-          <section id="alphabet">
-            <div className="break-all text-center">
+          <section>
+            <div className="break-all text-left">
               {alphabet.map((letter) => (
                 <span className="text-3xl hover:cursor-pointer">{letter}</span>
               ))}
