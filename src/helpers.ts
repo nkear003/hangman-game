@@ -1,5 +1,3 @@
-// TODO: Remove
-// import { alphabet } from './data';
 import type { Word } from './types';
 
 export const getRandomNumber = (max: number) => Math.floor(Math.random() * max);
@@ -17,6 +15,3 @@ export const drawGuesses = (word: string, guessedLetters: string[] = ['']) => {
       guessedLetters.includes(letter) ? `<span>${letter}</span>` : `<span>_</span>`,
     );
 };
-
-// TODO: Remove
-// export const alphabetString = alphabet.join(' ');
