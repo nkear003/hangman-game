@@ -1,16 +1,9 @@
 import React from 'react';
 import './App.css';
-import type { Word } from './types';
 import { words, alphabet } from './data';
-import { getRandomNumber } from './helpers';
+import { getRandomWord } from './helpers';
 
 function App() {
-  function selectWord(): Word {
-    const max = words.length;
-    const randomNum = getRandomNumber(max);
-    return words[randomNum];
-  }
-
   function createEmptySpaces() {
     let string = '';
     for (let i = 0; i < randomWord.name.length; i++) {
@@ -19,7 +12,7 @@ function App() {
     return string;
   }
 
-  const randomWord = selectWord();
+  const randomWord = getRandomWord(words);
   const emptySpaces = createEmptySpaces();
 
   return (
