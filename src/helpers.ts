@@ -1,3 +1,4 @@
+// TODO: Remove
 // import { alphabet } from './data';
 import type { Word } from './types';
 
@@ -9,4 +10,5 @@ export const getRandomWord = (words: Word[]): Word => {
   return words[randomNum];
 };
 
+// TODO: Remove
 // export const alphabetString = alphabet.join(' ');
