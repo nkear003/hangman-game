@@ -25,12 +25,13 @@ function App() {
   return (
     <>
       <header>
-        <h1>Hangman game</h1>
+        <h1 className="text-xl">Hangman game</h1>
       </header>
 
-      {/* Left side */}
-      <div className="flex">
-        <div className="flex flex-col basis-1/4">
+      {/* Flex container */}
+      <div className="flex flex-wrap">
+        {/* Left side */}
+        <div className="flex flex-col flex-grow flex-shrink basis-0">
           <section id="guesses">
             <h2>Category</h2>
             <p className="capitalize">
@@ -42,16 +43,18 @@ function App() {
           </section>
 
           <section id="alphabet">
-            {alphabet.map((letter) => {
-              return <span className="text-3xl hover:cursor-pointer">{letter}</span>;
-            })}
+            <div className="break-all text-center">
+              {alphabet.map((letter) => (
+                <span className="text-3xl hover:cursor-pointer">{letter}</span>
+              ))}
+            </div>
           </section>
         </div>
-      </div>
 
-      {/* Right side */}
-      <div className="">
-        <section id="noose">This is where the noose will be</section>
+        {/* Right side */}
+        <div className="flex flex-grow flex-shrink basis-0">
+          <section id="noose">This is where the noose will be</section>
+        </div>
       </div>
     </>
   );
