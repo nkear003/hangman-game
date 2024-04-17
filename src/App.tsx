@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import { words, alphabet } from './data';
-import { getRandomWord, drawGuesses } from './helpers';
+import { getRandomWord, drawInitialLines, drawGuesses, removeLetterFromAlphabet } from './helpers';
+
+// TODO We could update state and once it has all been updated, then rerender and during that, redraw lines, rather than passing it directly. Right now it is all bound to the click event. It works, but feels like there's a way to do it that requires less dependancy. Research best practices
 
 function App() {
-  const randomWord = getRandomWord(words);
-  const guesses = drawGuesses(randomWord.name);
+  const alphabetClone = [...alphabet];
+  // TODO Update naming of "name"
+  const { category, name } = useMemo(() => getRandomWord(words), []);
+
+  const [activeAlphabet, setActiveAlphabet] = useState(alphabetClone);
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  // TODO: Update naming of guessedLettersDisplay
+  const [guessedLettersDisplay, setGuessedLettersDisplay] = useState(drawInitialLines(name));
+
+  const handleAlphabetClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+
+    // Since we use event propagation, check for correct HTML element
+    if (target.tagName !== 'SPAN' || !target.textContent) return;
+
+    // Get the letter from the HTML element
+    const guessedLetter = target.textContent;
+
+    // If we haven't guessed this letter before, remove it
+    if (!guessedLetters.includes(guessedLetter)) {
+      // Update the active alphabet with the new array, with the guessed letter removed
+      const updatedActiveAlphabet = removeLetterFromAlphabet(guessedLetter, activeAlphabet);
+      setActiveAlphabet(updatedActiveAlphabet);
+
+      // Update the guessed letters with whatever was already there plus the new one
+      const updatedGuessedLetters = [...guessedLetters, guessedLetter];
+      setGuessedLetters(updatedGuessedLetters);
+
+      // Update update the guessed letters
+      const updatedGuessedLettersDisplay = drawGuesses(name, updatedGuessedLetters);
+      // Use a variable rather than waiting on state to update
+      setGuessedLettersDisplay(updatedGuessedLettersDisplay);
+    }
+  };
 
   return (
     <main className="p-6">
@@ -20,21 +54,19 @@ function App() {
           <section className="flex flex-col gap-6">
             <div className="flex">
               <p className="uppercase border-2 border-black p-2">
-                {randomWord?.category
-                  ? randomWord.category
-                  : 'There was an issue selecting a random word'}
+                {category ? category : 'There was an issue selecting a random word'}
               </p>
             </div>
             <div className="flex gap-3 text-3xl">
-              {guesses.map((letter, index) => (
+              {guessedLettersDisplay.map((letter, index) => (
                 <span key={`alphabet-${index}-${letter}`}>{letter}</span>
               ))}
             </div>
           </section>
 
           <section>
-            <div className="flex flex-wrap gap-3 break-all text-left">
-              {alphabet.map((letter, index) => (
+            <div onClick={handleAlphabetClick} className="flex flex-wrap gap-3 break-all text-left">
+              {activeAlphabet.map((letter, index) => (
                 <span key={`alphabet-${index}-${letter}`} className="text-3xl hover:cursor-pointer">
                   {letter}
                 </span>
