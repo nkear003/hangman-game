@@ -57,14 +57,18 @@ function App() {
 
   return (
     <main className="p-6">
-      <header className="mb-6">
+      <header className="flex justify-between mb-6">
         <h1 className="text-2xl font-bold">Hangman game</h1>
+        <button
+          className="bg-black text-white p-2 hover:bg-white hover:text-black border-black border-2 rounded-full"
+          onClick={handleGameReset}
+        >
+          Reset game
+        </button>
       </header>
 
-      <button onClick={handleGameReset}>Reset game</button>
-
       {/* Flex container */}
-      <div className="flex flex-wrap gap-6">
+      <div className="flex flex-wrap gap-6 mb-6">
         {/* Left side */}
         <div className="flex flex-col flex-1 gap-6">
           <section className="flex flex-col gap-6">
