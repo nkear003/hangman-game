@@ -1,19 +1,29 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
 import { words, alphabet } from './data';
 import { getRandomWord, drawInitialLines, drawGuesses, removeLetterFromAlphabet } from './helpers';
 
 function App() {
   const alphabetClone = [...alphabet];
-  const { category, name } = useMemo(() => getRandomWord(words), []);
 
+  const [gameWord, setGameWord] = useState(getRandomWord(words));
   const [activeAlphabet, setActiveAlphabet] = useState(alphabetClone);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-  const [guessedLettersDisplay, setGuessedLettersDisplay] = useState(drawInitialLines(name));
+  const [guessedLettersDisplay, setGuessedLettersDisplay] = useState(
+    drawInitialLines(gameWord.name),
+  );
+
+  const handleGameReset = () => {
+    setActiveAlphabet([...alphabet]);
+    setGuessedLetters([]);
+    setGameWord(getRandomWord(words));
+    setGuessedLettersDisplay(drawInitialLines(gameWord.name));
+  };
 
   const handleAlphabetClick = (
     e: React.MouseEvent<HTMLDivElement | HTMLSpanElement, MouseEvent>,
   ) => {
+    // If we are at the end of the game, don't allow more clicks
     if (guessedLetters.length === 6) {
       // TODO Do something here to alert the user
       console.log('Out of guesses');
@@ -39,7 +49,7 @@ function App() {
       setGuessedLetters(updatedGuessedLetters);
 
       // Update update the guessed letters
-      const updatedGuessedLettersDisplay = drawGuesses(name, updatedGuessedLetters);
+      const updatedGuessedLettersDisplay = drawGuesses(gameWord.name, updatedGuessedLetters);
       // Use a variable rather than waiting on state to update
       setGuessedLettersDisplay(updatedGuessedLettersDisplay);
     }
@@ -51,6 +61,8 @@ function App() {
         <h1 className="text-2xl font-bold">Hangman game</h1>
       </header>
 
+      <button onClick={handleGameReset}>Reset game</button>
+
       {/* Flex container */}
       <div className="flex flex-wrap gap-6">
         {/* Left side */}
@@ -58,7 +70,9 @@ function App() {
           <section className="flex flex-col gap-6">
             <div className="flex">
               <p className="uppercase border-2 border-black p-2">
-                {category ? category : 'There was an issue selecting a random word'}
+                {gameWord.category
+                  ? gameWord.category
+                  : 'There was an issue selecting a random word'}
               </p>
             </div>
             <div className="flex gap-3 text-3xl">
