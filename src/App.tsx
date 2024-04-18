@@ -21,7 +21,7 @@ function App() {
   };
 
   const handleAlphabetClick = (
-    e: React.MouseEvent<HTMLDivElement | HTMLSpanElement, MouseEvent>,
+    e: React.MouseEvent<HTMLDivElement | HTMLSpanElement | HTMLButtonElement, MouseEvent>,
   ) => {
     // If we are at the end of the game, don't allow more clicks
     if (guessedLetters.length === 6) {
@@ -33,7 +33,7 @@ function App() {
     const target = e.target as HTMLElement;
 
     // Since we use event propagation, check for correct HTML element
-    if (target.tagName !== 'SPAN' || !target.textContent) return;
+    if (target.tagName !== 'BUTTON' || !target.textContent) return;
 
     // Get the letter from the HTML element
     const guessedLetter = target.textContent;
@@ -57,14 +57,8 @@ function App() {
 
   return (
     <main className="p-6">
-      <header className="flex justify-between mb-6">
+      <header className="mb-6">
         <h1 className="text-2xl font-bold">Hangman game</h1>
-        <button
-          className="bg-black text-white p-2 hover:bg-white hover:text-black border-black border-2 rounded-full"
-          onClick={handleGameReset}
-        >
-          Reset game
-        </button>
       </header>
 
       {/* Flex container */}
@@ -87,11 +81,17 @@ function App() {
           </section>
 
           <section>
-            <div onClick={handleAlphabetClick} className="flex flex-wrap gap-3 break-all text-left">
+            <div
+              onClick={handleAlphabetClick}
+              className="flex flex-wrap gap-1.5 break-all text-left"
+            >
               {activeAlphabet.map((letter, index) => (
-                <span key={`alphabet-${index}-${letter}`} className="text-3xl hover:cursor-pointer">
-                  {letter}
-                </span>
+                <button
+                  key={`alphabet-${index}-${letter}`}
+                  className="w-8 -ml-1.5 flex hover:cursor-pointer hover:text-white hover:bg-black"
+                >
+                  <span className="text-3xl m-auto pointer-events-none">{letter}</span>
+                </button>
               ))}
             </div>
           </section>
@@ -102,6 +102,12 @@ function App() {
           <section>{`Number of guesses: ${guessedLetters.length} / 6`}</section>
         </div>
       </div>
+      <button
+        className="bg-black text-white p-2 hover:bg-white hover:text-black border-black border-2 rounded-full"
+        onClick={handleGameReset}
+      >
+        Reset game
+      </button>
     </main>
   );
 }
