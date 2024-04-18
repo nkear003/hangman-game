@@ -3,19 +3,23 @@ import './App.css';
 import { words, alphabet } from './data';
 import { getRandomWord, drawInitialLines, drawGuesses, removeLetterFromAlphabet } from './helpers';
 
-// TODO We could update state and once it has all been updated, then rerender and during that, redraw lines, rather than passing it directly. Right now it is all bound to the click event. It works, but feels like there's a way to do it that requires less dependancy. Research best practices
-
 function App() {
   const alphabetClone = [...alphabet];
-  // TODO Update naming of "name"
   const { category, name } = useMemo(() => getRandomWord(words), []);
 
   const [activeAlphabet, setActiveAlphabet] = useState(alphabetClone);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-  // TODO: Update naming of guessedLettersDisplay
   const [guessedLettersDisplay, setGuessedLettersDisplay] = useState(drawInitialLines(name));
 
-  const handleAlphabetClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleAlphabetClick = (
+    e: React.MouseEvent<HTMLDivElement | HTMLSpanElement, MouseEvent>,
+  ) => {
+    if (guessedLetters.length === 6) {
+      // TODO Do something here to alert the user
+      console.log('Out of guesses');
+      return;
+    }
+
     const target = e.target as HTMLElement;
 
     // Since we use event propagation, check for correct HTML element
@@ -77,7 +81,7 @@ function App() {
 
         {/* Right side */}
         <div className="flex flex-1">
-          <section id="noose">This is where the noose will be</section>
+          <section>{`Number of guesses: ${guessedLetters.length} / 6`}</section>
         </div>
       </div>
     </main>
