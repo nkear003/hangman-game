@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { words, alphabet } from './data';
 import { getRandomWord, drawInitialLines, drawGuesses, removeLetterFromAlphabet } from './helpers';
