@@ -1,4 +1,10 @@
-import { getRandomWord, getRandomNumber, drawGuesses, removeLetterFromAlphabet } from './functions';
+import {
+  getRandomWord,
+  getRandomNumber,
+  drawGuesses,
+  removeLetterFromAlphabet,
+  checkIfLetterIsInWord,
+} from './functions';
 
 const mockWords = [{ category: 'fruit', name: 'apple' }];
 
@@ -59,5 +65,19 @@ describe('removeLetterFromAlphabet', () => {
     const updatedAlphabet = removeLetterFromAlphabet();
 
     expect(updatedAlphabet).toEqual(['']);
+  });
+});
+
+describe('checkIfLetterIsInWord', () => {
+  it('should return truthy if the letter is the word', () => {
+    expect(checkIfLetterIsInWord('cat', 'a')).toBeTruthy();
+  });
+
+  it('should return falsy if the letter is not in the word', () => {
+    expect(checkIfLetterIsInWord('cat', 'b')).toBeFalsy();
+  });
+
+  it('should work with a mix of upper and lower case', () => {
+    expect(checkIfLetterIsInWord('cAt', 'a')).toBeTruthy();
   });
 });

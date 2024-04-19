@@ -10,6 +10,9 @@ export const getRandomWord = (words: Word[]): Word => {
 
 export const drawInitialLines = (word: string) => word.split('').map((letter) => '_');
 
+export const checkIfLetterIsInWord = (word: string, letter: string) =>
+  word.toUpperCase().split('').includes(letter.toUpperCase());
+
 export const drawGuesses = (wordToGuess: string, guessedLetters: string[] = ['']) => {
   // Convert to uppercase to avoid issues
   wordToGuess = wordToGuess.toUpperCase();

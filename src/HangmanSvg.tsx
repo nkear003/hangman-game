@@ -1,13 +1,13 @@
 type Props = {
-  numberOfGuesses: number;
+  numberOfIncorrectGusses: number;
 };
-const HangmanSvg = ({ numberOfGuesses }: Props) => (
+const HangmanSvg = ({ numberOfIncorrectGusses }: Props) => (
   <svg
     width="100%"
     height="auto"
     viewBox="0 0 236 441"
     fill="none"
-    data-guesses={numberOfGuesses}
+    data-guesses={numberOfIncorrectGusses}
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="hangman">

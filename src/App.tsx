@@ -6,6 +6,7 @@ import {
   drawInitialLines,
   drawGuesses,
   removeLetterFromAlphabet,
+  checkIfLetterIsInWord,
 } from './functions';
 import HangmanSvg from './HangmanSvg';
 
@@ -23,6 +24,7 @@ function App() {
     setGuessedLetters([]);
     setGameWord(getRandomWord(words));
     setGuessedLettersDisplay(drawInitialLines(word));
+    setNumberOfIncorrectGuesses(0);
   };
 
   const handleAlphabetClick = (
@@ -43,8 +45,14 @@ function App() {
     // Get the letter from the HTML element
     const guessedLetter = target.textContent;
 
-    // If we haven't guessed this letter before, remove it
+    // If we haven't guessed this letter before, handle it
     if (!guessedLetters.includes(guessedLetter)) {
+      // Check to see if letter is in the word
+      const guessedCorrect = checkIfLetterIsInWord(word, guessedLetter);
+
+      // If it is not in the word, add +1 to incorrectGuesses
+      if (!guessedCorrect) setNumberOfIncorrectGuesses(numberOfIncorrectGusses + 1);
+
       // Update the active alphabet with the new array, with the guessed letter removed
       const updatedActiveAlphabet = removeLetterFromAlphabet(guessedLetter, activeAlphabet);
       setActiveAlphabet(updatedActiveAlphabet);
@@ -103,7 +111,7 @@ function App() {
         {/* Right side */}
         <div className="flex flex-1">
           <section>
-            <HangmanSvg numberOfGuesses={guessedLetters.length} />
+            <HangmanSvg numberOfIncorrectGusses={numberOfIncorrectGusses} />
           </section>
         </div>
       </div>
