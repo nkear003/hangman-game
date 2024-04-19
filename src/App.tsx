@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './App.scss';
 import { words, alphabet } from './data';
 import {
   getRandomWord,
@@ -7,6 +7,7 @@ import {
   drawGuesses,
   removeLetterFromAlphabet,
 } from './functions';
+import HangmanSvg from './HangmanSvg';
 
 function App() {
   const alphabetClone = [...alphabet];
@@ -104,7 +105,10 @@ function App() {
 
         {/* Right side */}
         <div className="flex flex-1">
-          <section>{`Number of guesses: ${guessedLetters.length} / 6`}</section>
+          <section>
+            <p>{`Number of guesses: ${guessedLetters.length} / 6`}</p>
+            <HangmanSvg numberOfGuesses={guessedLetters.length} />
+          </section>
         </div>
       </div>
       <button

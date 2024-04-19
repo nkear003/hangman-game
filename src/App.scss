@@ -1,0 +1,69 @@
+#head,
+#torso,
+#arm-left,
+#arm-right,
+#leg-left,
+#leg-right {
+  visibility: hidden;
+}
+
+@for $i from 1 through 6 {
+  [data-guesses='#{$i}'] {
+    #head {
+      visibility: visible;
+    }
+  }
+}
+
+@for $i from 2 through 6 {
+  [data-guesses='#{$i}'] {
+    #head,
+    #torso {
+      visibility: visible;
+    }
+  }
+}
+
+@for $i from 3 through 6 {
+  [data-guesses='#{$i}'] {
+    #head,
+    #torso,
+    #arm-left {
+      visibility: visible;
+    }
+  }
+}
+
+@for $i from 4 through 6 {
+  [data-guesses='#{$i}'] {
+    #head,
+    #torso,
+    #arm-left,
+    #arm-right {
+      visibility: visible;
+    }
+  }
+}
+
+@for $i from 5 through 6 {
+  [data-guesses='#{$i}'] {
+    #head,
+    #torso,
+    #arm-left,
+    #arm-right,
+    #leg-left {
+      visibility: visible;
+    }
+  }
+}
+
+[data-guesses='6'] {
+  #head,
+  #torso,
+  #arm-left,
+  #arm-right,
+  #leg-left,
+  #leg-right {
+    visibility: visible;
+  }
+}
