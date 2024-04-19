@@ -106,7 +106,6 @@ function App() {
         {/* Right side */}
         <div className="flex flex-1">
           <section>
-            <p>{`Number of guesses: ${guessedLetters.length} / 6`}</p>
             <HangmanSvg numberOfGuesses={guessedLetters.length} />
           </section>
         </div>

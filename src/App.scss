@@ -3,7 +3,8 @@
 #arm-left,
 #arm-right,
 #leg-left,
-#leg-right {
+#leg-right,
+#face {
   visibility: hidden;
 }
 
@@ -63,7 +64,8 @@
   #arm-left,
   #arm-right,
   #leg-left,
-  #leg-right {
+  #leg-right,
+  #face {
     visibility: visible;
   }
 }
