@@ -12,18 +12,17 @@ import HangmanSvg from './HangmanSvg';
 function App() {
   const alphabetClone = [...alphabet];
 
-  const [gameWord, setGameWord] = useState(getRandomWord(words));
+  const [{ category, name: word }, setGameWord] = useState(getRandomWord(words));
   const [activeAlphabet, setActiveAlphabet] = useState(alphabetClone);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-  const [guessedLettersDisplay, setGuessedLettersDisplay] = useState(
-    drawInitialLines(gameWord.name),
-  );
+  const [guessedLettersDisplay, setGuessedLettersDisplay] = useState(drawInitialLines(word));
+  const [numberOfIncorrectGusses, setNumberOfIncorrectGuesses] = useState(0);
 
   const handleGameReset = () => {
     setActiveAlphabet([...alphabet]);
     setGuessedLetters([]);
     setGameWord(getRandomWord(words));
-    setGuessedLettersDisplay(drawInitialLines(gameWord.name));
+    setGuessedLettersDisplay(drawInitialLines(word));
   };
 
   const handleAlphabetClick = (
@@ -55,7 +54,7 @@ function App() {
       setGuessedLetters(updatedGuessedLetters);
 
       // Update update the guessed letters
-      const updatedGuessedLettersDisplay = drawGuesses(gameWord.name, updatedGuessedLetters);
+      const updatedGuessedLettersDisplay = drawGuesses(word, updatedGuessedLetters);
       // Use a variable rather than waiting on state to update
       setGuessedLettersDisplay(updatedGuessedLettersDisplay);
     }
@@ -74,9 +73,7 @@ function App() {
           <section className="flex flex-col gap-6">
             <div className="flex">
               <p className="uppercase border-2 border-black p-2">
-                {gameWord.category
-                  ? gameWord.category
-                  : 'There was an issue selecting a random word'}
+                {category ? category : 'There was an issue selecting a random word'}
               </p>
             </div>
             <div className="flex gap-3 text-3xl">
