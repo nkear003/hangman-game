@@ -31,11 +31,8 @@ function App() {
     e: React.MouseEvent<HTMLDivElement | HTMLSpanElement | HTMLButtonElement, MouseEvent>,
   ) => {
     // If we are at the end of the game, don't allow more clicks
-    if (guessedLetters.length === 6) {
-      // TODO Do something here to alert the user
-      console.log('Out of guesses');
-      return;
-    }
+    // TODO Do something here to alert the user
+    if (numberOfIncorrectGusses === 6) return;
 
     const target = e.target as HTMLElement;
 
