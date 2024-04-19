@@ -1,4 +1,4 @@
-import { getRandomWord, getRandomNumber, drawGuesses, removeLetterFromAlphabet } from './helpers';
+import { getRandomWord, getRandomNumber, drawGuesses, removeLetterFromAlphabet } from './functions';
 
 const mockWords = [{ category: 'fruit', name: 'apple' }];
 

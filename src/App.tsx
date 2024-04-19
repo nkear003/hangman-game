@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 import { words, alphabet } from './data';
-import { getRandomWord, drawInitialLines, drawGuesses, removeLetterFromAlphabet } from './helpers';
+import {
+  getRandomWord,
+  drawInitialLines,
+  drawGuesses,
+  removeLetterFromAlphabet,
+} from './functions';
 
 function App() {
   const alphabetClone = [...alphabet];
